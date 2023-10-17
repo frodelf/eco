@@ -18,9 +18,9 @@
     <div th:replace="view/block/full-bar :: full-bar"></div>
     <div class="content-wrapper">
         <section class="content" style="margin-top: 20px;">
-            <a href="/pollution/add" class="btn btn-success float-right" style="font-weight: bold; margin-left: 25px">Додати
-                забруднення</a>
-            <form class="float-right" method="post" action="/pollution/download" enctype="multipart/form-data"
+            <a href="/pollutant/add" class="btn btn-success float-right" style="font-weight: bold; margin-left: 25px">Додати
+                речовину</a>
+            <form class="float-right" method="post" action="/pollutant/download" enctype="multipart/form-data"
                   id="excelForm">
                 <label for="excelFile" class="btn btn-success">Вставити з Excel</label>
                 <input type="file" name="file" id="excelFile" style="display: none">
@@ -29,25 +29,23 @@
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th>Об'єкт</th>
-                    <th>Речовина</th>
-                    <th>Кількість речовини</th>
-                    <th>Рік</th>
+                    <th>Назва</th>
+                    <th>МДК</th>
+                    <th>Рівент небеспеки</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="pollution: ${pollutions}">
-                    <td th:text="${pollution.id}"></td>
-                    <td th:text="${pollution.enterprise.name}"></td>
-                    <td th:text="${pollution.pollutant.name}"></td>
-                    <td th:text="${pollution.quantity} + ' (' + ${pollution.unitOfMeasurement} + ')'"></td>
-                    <td th:text="${pollution.year}"></td>
+                <tr th:each="pollutant: ${pollutants}">
+                    <td th:text="${pollutant.id}"></td>
+                    <td th:text="${pollutant.name}"></td>
+                    <td th:text="${pollutant.mpc} + ' (' + ${pollutant.unitOfMeasurement} + ')'"></td>
+                    <td style="padding-left: 30px;" th:text="${pollutant.dangerous}"></td>
                     <td style="width: 100px">
-                        <a class="btn btn-default btn-sm" th:href="@{/pollution/edit/{id}(id=${pollution.id})}" title="Редактировать">
+                        <a class="btn btn-default btn-sm" th:href="@{/pollutant/edit/{id}(id=${pollutant.id})}" title="Редактировать">
                             <i class="fa fa-pencil-alt"></i>
                         </a>
-                        <a class="btn btn-default btn-sm" th:href="@{/pollution/delete/{id}(id=${pollution.id})}" title="Удалить" >
+                        <a class="btn btn-default btn-sm" th:href="@{/pollutant/delete/{id}(id=${pollutant.id})}" title="Удалить" >
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>

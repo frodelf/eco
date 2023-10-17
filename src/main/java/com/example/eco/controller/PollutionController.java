@@ -60,11 +60,11 @@ public class PollutionController {
         Sheet sheet = workbook.getSheetAt(0);
         for (Row row : sheet) {
             Pollution pollution = new Pollution();
-            String s = removeCommaAndDigits(row.getCell(0).toString());
             pollution.setEnterprise(enterpriseRepo.findById(Long.valueOf(removeCommaAndDigits(row.getCell(0).toString()))).get());
             pollution.setPollutant(pollutantRepo.findById(Long.valueOf(removeCommaAndDigits(row.getCell(1).toString()))).get());
             pollution.setQuantity(Double.valueOf(row.getCell(2).toString()));
             pollution.setYear(removeCommaAndDigits(row.getCell(3).toString()));
+            pollution.setUnitOfMeasurement(row.getCell(4).toString());
             pollutionRepo.save(pollution);
         }
         workbook.close();

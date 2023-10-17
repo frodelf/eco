@@ -18,12 +18,6 @@ import java.io.IOException;
 @RequestMapping("/enterprise")
 public class EnterpriseController {
     private final EnterpriseRepo enterpriseRepo;
-    @GetMapping("/{id}")
-    public ModelAndView stats(){
-        ModelAndView modelAndView = new ModelAndView("view/enterprise/stats");
-
-        return modelAndView;
-    }
 
     @GetMapping("/index")
     public ModelAndView index() {

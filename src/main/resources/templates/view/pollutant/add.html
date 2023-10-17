@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body class="sidebar-mini layout-fixed sidebar-closed sidebar-collapse" style="height: auto;">
+<div class="wrapper">
+    <div th:replace="view/block/full-bar :: full-bar"></div>
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 20px;">
+            <center>
+                <div class="card" style="width: 50%;">
+                    <form class="float-right" method="post" action="/pollution/add"
+                          th:object="${pollutant}">
+                        <div class="card-body" style="font-weight: bold">
+                            <div th:if="${pollutant.id != null}">
+                                <input type="hidden" th:field="*{id}" >
+                            </div>
+                            Назва
+                            <input type="text" class="form-control" th:field="*{name}" style="width: 80%; margin-bottom: 25px">
+                            Допустимий максимум
+                            <input type="text" class="form-control" th:field="*{mpc}" style="width: 80%; margin-bottom: 25px">
+                            Рівень небеспеки
+                            <input type="text" class="form-control" th:field="*{dangerous}" style="width: 80%; margin-bottom: 25px">
+                            Одиниці вимірювання
+                            <input type="text" class="form-control" th:field="*{unitOfMeasurement}" style="width: 80%; margin-bottom: 25px">
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Зберегти</button>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </section>
+    </div>
+    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+    <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/adminlte/dist/js/adminlte.js?v=3.2.0"></script>
+</div>
+</body>
+
+</html>
