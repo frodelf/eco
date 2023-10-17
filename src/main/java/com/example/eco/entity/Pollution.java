@@ -10,6 +10,7 @@ public class Pollution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String year;
+    private String unitOfMeasurement;
     private Double quantity;
     @ManyToOne
     private Enterprise enterprise;

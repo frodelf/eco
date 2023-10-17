@@ -13,6 +13,7 @@ public class Pollutant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String unitOfMeasurement;
     private Double mpc;
     private Integer dangerous;
 }
