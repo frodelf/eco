@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <link href="https://сdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body class="sidebar-mini layout-fixed sidebar-closed sidebar-collapse" style="height: auto;">
+<div class="wrapper">
+    <div th:replace="view/block/full-bar :: full-bar"></div>
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 20px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <canvas id="myPieChart1"></canvas>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <canvas id="myPieChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+    <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/adminlte/dist/js/adminlte.js?v=3.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('myPieChart1').getContext('2d');
+        var ctx1 = document.getElementById('myPieChart2').getContext('2d');
+
+        var data = {
+            labels: ['Постачальник 1', 'Постачальник 2', 'Постачальник 3'],
+            datasets: [{
+                data: [30, 40, 30],
+                backgroundColor: ['#FF5733', '#33FF57', '#5733FF']
+            }]
+        };
+
+        var options = {
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: options
+        });
+
+        var myPieChart1 = new Chart(ctx1, {
+            type: 'doughnut',
+            data: data,
+            options: options
+        });
+    </script>
+
+</div>
+</body>
+
+</html>
