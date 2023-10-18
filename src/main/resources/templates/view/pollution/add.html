@@ -38,7 +38,7 @@
                             <div class="row" style="width: 80%; margin-bottom: 25px;">
                                 <div class="col" style=" padding-left: 0">
                                     Кількість
-                                    <input type="text" class="form-control" th:field="*{quantity}">
+                                    <input type="number" class="form-control" th:field="*{quantity}">
                                 </div>
                                 <div class="col" style="padding-right: 0">
                                     <span style="white-space: nowrap;">Одиниці вимірювання</span>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             Рік
-                            <input type="text" class="form-control" th:field="*{year}" style="width: 80%; margin-bottom: 25px">
+                            <input type="number" class="form-control" th:field="*{year}" style="width: 80%; margin-bottom: 25px">
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Зберегти</button>

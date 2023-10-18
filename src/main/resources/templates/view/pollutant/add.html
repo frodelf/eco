@@ -19,7 +19,7 @@
         <section class="content" style="margin-top: 20px;">
             <center>
                 <div class="card" style="width: 50%;">
-                    <form class="float-right" method="post" action="/pollution/add"
+                    <form class="float-right" method="post" action="/pollutant/add"
                           th:object="${pollutant}">
                         <div class="card-body" style="font-weight: bold">
                             <div th:if="${pollutant.id != null}">
@@ -27,10 +27,10 @@
                             </div>
                             Назва
                             <input type="text" class="form-control" th:field="*{name}" style="width: 80%; margin-bottom: 25px">
-                            Допустимий максимум
-                            <input type="text" class="form-control" th:field="*{mpc}" style="width: 80%; margin-bottom: 25px">
+                            ГДК
+                            <input type="number" class="form-control" th:field="*{mpc}" style="width: 80%; margin-bottom: 25px">
                             Рівень небеспеки
-                            <input type="text" class="form-control" th:field="*{dangerous}" style="width: 80%; margin-bottom: 25px">
+                            <input type="number" class="form-control" th:field="*{dangerous}" style="width: 80%; margin-bottom: 25px">
                             Одиниці вимірювання
                             <input type="text" class="form-control" th:field="*{unitOfMeasurement}" style="width: 80%; margin-bottom: 25px">
                         </div>
