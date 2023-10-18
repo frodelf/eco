@@ -1,10 +1,10 @@
 package com.example.eco.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +16,6 @@ public class Pollutant {
     private String unitOfMeasurement;
     private Double mpc;
     private Integer dangerous;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "pollutant")
+    private List<Pollution> pollutionList;
 }

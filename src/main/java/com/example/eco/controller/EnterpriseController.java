@@ -54,8 +54,10 @@ public class EnterpriseController {
     public ModelAndView download(@RequestParam("file") MultipartFile file) throws IOException {
         Workbook workbook = new XSSFWorkbook(file.getInputStream());
         Sheet sheet = workbook.getSheetAt(0);
+        long index = 0;
         for (Row row : sheet) {
             Enterprise enterprise = new Enterprise();
+            enterprise.setId(++index);
             enterprise.setName(row.getCell(0).toString());
             enterprise.setInfo(row.getCell(1).toString());
             enterprise.setAddress(row.getCell(2).toString());

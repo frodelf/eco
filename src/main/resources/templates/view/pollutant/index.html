@@ -45,13 +45,36 @@
                         <a class="btn btn-default btn-sm" th:href="@{/pollutant/edit/{id}(id=${pollutant.id})}" title="Редактировать">
                             <i class="fa fa-pencil-alt"></i>
                         </a>
-                        <a class="btn btn-default btn-sm" th:href="@{/pollutant/delete/{id}(id=${pollutant.id})}" title="Удалить" >
+                        <a class="btn btn-default btn-sm modal1" th:data-redirect="@{/pollutant/delete/{id}(id=${pollutant.id})}" title="Удалить" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Підтвердіть видалення</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Якщо ви видалите речовину, то видаляться всі елементи, які прив'язанні до цієї речовини
+                            <br/>
+                            <br/>
+                            Ви впевнені, що хочете видалити цю речовину?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати
+                            </button>
+                            <button type="button" class="btn btn-danger confirm">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     <script>
@@ -72,6 +95,32 @@
                 "paging": false
             })
         })
+    </script>
+    <script>
+        const modalButtons = document.querySelectorAll(".modal1");
+        const modal = document.getElementById("myModal");
+        const confirmButtons = document.querySelectorAll(".confirm");
+        const cancelButtons = document.querySelectorAll(".cancel");
+
+        modalButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                modal.style.display = "flex";
+                const redirectUrl = button.getAttribute("data-redirect");
+
+                confirmButtons.forEach(confirmButton => {
+                    confirmButton.addEventListener("click", () => {
+                        modal.style.display = "none";
+                        window.location.href = redirectUrl;
+                    });
+                });
+
+                cancelButtons.forEach(cancelButton => {
+                    cancelButton.addEventListener("click", () => {
+                        modal.style.display = "none";
+                    });
+                });
+            });
+        });
     </script>
 </div>
 </body>

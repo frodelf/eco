@@ -50,8 +50,10 @@ public class PollutantController {
     public ModelAndView download(@RequestParam("file") MultipartFile file) throws IOException {
         Workbook workbook = new XSSFWorkbook(file.getInputStream());
         Sheet sheet = workbook.getSheetAt(0);
+        long index = 0;
         for (Row row : sheet) {
             Pollutant pollutant = new Pollutant();
+            pollutant.setId(++index);
             pollutant.setName(row.getCell(0).toString());
             pollutant.setMpc(Double.valueOf(row.getCell(1).toString()));
             pollutant.setDangerous(Integer.valueOf(removeCommaAndDigits(row.getCell(2).toString())));
