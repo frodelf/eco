@@ -1,8 +1,9 @@
 package com.example.eco.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -16,6 +17,11 @@ public class Pollutant {
     private String unitOfMeasurement;
     private Double mpc;
     private Integer dangerous;
+    private Double RFC;
+    private Integer FS;
+    private Double impost;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "pollutant")
+    @JsonBackReference
+    @ToString.Exclude
     private List<Pollution> pollutionList;
 }

@@ -32,6 +32,9 @@
                     <th>Назва</th>
                     <th>ГДК</th>
                     <th>Рівент небеспеки</th>
+                    <th>RFC(мг/м^3)</th>
+                    <th>FS</th>
+                    <th>Податок(грн/т)</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -41,6 +44,9 @@
                     <td th:text="${pollutant.name}"></td>
                     <td th:text="${pollutant.mpc} + ' (' + ${pollutant.unitOfMeasurement} + ')'"></td>
                     <td style="padding-left: 30px;" th:text="${pollutant.dangerous}"></td>
+                    <td th:text="${pollutant.RFC}"></td>
+                    <td th:text="${pollutant.FS}"></td>
+                    <td th:text="${pollutant.impost}"></td>
                     <td style="width: 100px">
                         <a class="btn btn-default btn-sm" th:href="@{/pollutant/edit/{id}(id=${pollutant.id})}" title="Редактировать">
                             <i class="fa fa-pencil-alt"></i>

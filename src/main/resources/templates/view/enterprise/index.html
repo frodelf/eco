@@ -37,10 +37,10 @@
                 </thead>
                 <tbody>
                 <tr th:each="enterprise: ${enterprises}">
-                    <td th:text="${enterprise.id}" th:onclick="|window.location.href='@{/enterprise/{id}(id=${enterprise.id})}'|"></td>
-                    <td th:text="${enterprise.name}" th:onclick="|window.location.href='@{/enterprise/{id}(id=${enterprise.id})}'|"></td>
-                    <td th:text="${enterprise.info}" th:onclick="|window.location.href='@{/enterprise/{id}(id=${enterprise.id})}'|"></td>
-                    <td th:text="${enterprise.address}" th:onclick="|window.location.href='@{/enterprise/{id}(id=${enterprise.id})}'|"></td>
+                    <td th:text="${enterprise.id}" ></td>
+                    <td th:text="${enterprise.name}"></td>
+                    <td th:text="${enterprise.info}"></td>
+                    <td th:text="${enterprise.address}"></td>
                     <td style="width: 100px">
                         <a class="btn btn-default btn-sm" th:href="@{/enterprise/edit/{id}(id=${enterprise.id})}" title="Редактировать">
                             <i class="fa fa-pencil-alt"></i>

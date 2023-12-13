@@ -21,7 +21,7 @@
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                                 data-accordion="false">
                                 <li class="nav-item">
-                                    <a href="/enterprise/index" class="nav-link" style="color: #3e393e; padding-left: 24px">
+                                    <a href="/enterprise/index" th:class="@{nav-link {objectActive}(objectActive=${objectActive==true?'active':''})}" style="color: #3e393e; padding-left: 24px">
                                         <i class="fa fa-building"></i>
                                         <p>
                                             Об'єкти
@@ -29,7 +29,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/pollutant/index" class="nav-link" style="color: #3e393e; padding-left: 24px">
+                                    <a href="/pollutant/index" th:class="@{nav-link {pollutantActive}(pollutantActive=${pollutantActive==true?'active':''})}" style="color: #3e393e; padding-left: 24px">
                                         <i class="fa fa-disease"></i>
                                         <p>
                                             Забруднюючі речовини
@@ -37,7 +37,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/pollution/index" class="nav-link" style="color: #3e393e; padding-left: 24px">
+                                    <a href="/pollution/index" th:class="@{nav-link {pollutionActive}(pollutionActive=${pollutionActive==true?'active':''})}" style="color: #3e393e; padding-left: 24px">
                                         <i class="fa fa-skull"></i>
                                         <p>
                                             Забруднення

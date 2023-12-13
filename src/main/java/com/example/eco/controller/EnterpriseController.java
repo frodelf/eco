@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,14 +57,22 @@ public class EnterpriseController {
         Sheet sheet = workbook.getSheetAt(0);
         long index = 0;
         for (Row row : sheet) {
-            Enterprise enterprise = new Enterprise();
-            enterprise.setId(++index);
-            enterprise.setName(row.getCell(0).toString());
-            enterprise.setInfo(row.getCell(1).toString());
-            enterprise.setAddress(row.getCell(2).toString());
-            enterpriseRepo.save(enterprise);
+            try {
+                Enterprise enterprise = new Enterprise();
+                enterprise.setId(++index);
+                enterprise.setName(row.getCell(0).toString());
+                enterprise.setInfo(row.getCell(1).toString());
+                enterprise.setAddress(row.getCell(2).toString());
+                enterpriseRepo.save(enterprise);
+            } catch (Exception e) {
+                break;
+            }
         }
         workbook.close();
         return new ModelAndView("redirect:/enterprise/index");
+    }
+    @ModelAttribute
+    public void activeMenuItem(Model model) {
+        model.addAttribute("objectActive", true);
     }
 }

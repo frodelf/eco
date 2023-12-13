@@ -26,13 +26,25 @@
                                 <input type="hidden" th:field="*{id}" >
                             </div>
                             Назва
-                            <input type="text" class="form-control" th:field="*{name}" style="width: 80%; margin-bottom: 25px">
-                            ГДК
-                            <input type="number" class="form-control" th:field="*{mpc}" style="width: 80%; margin-bottom: 25px">
-                            Рівень небеспеки
-                            <input type="number" class="form-control" th:field="*{dangerous}" style="width: 80%; margin-bottom: 25px">
-                            Одиниці вимірювання
-                            <input type="text" class="form-control" th:field="*{unitOfMeasurement}" style="width: 80%; margin-bottom: 25px">
+                            <div class="row"><div class="col-12"><input type="text" class="form-control" th:field="*{name}" style="margin-bottom: 25px"></div></div>
+                            <div class="row">
+                                <div class="col-6">
+                                    ГДК
+                                    <input class="form-control only-number" th:field="*{mpc}" style="margin-bottom: 25px">
+                                    Рівень небеспеки
+                                    <input class="form-control only-number-without-dot" th:field="*{dangerous}" style="margin-bottom: 25px">
+                                    Одиниці вимірювання
+                                    <input type="text" class="form-control" th:field="*{unitOfMeasurement}" style="margin-bottom: 25px">
+                                </div>
+                                <div class="col-6">
+                                    RFC(мг/м^3)
+                                    <input class="form-control only-number" th:field="*{RFC}" style="margin-bottom: 25px">
+                                    FS
+                                    <input class="form-control only-number-without-dot" th:field="*{FS}" style="margin-bottom: 25px">
+                                    Податок(грн/т)
+                                    <input class="form-control only-number" th:field="*{impost}" style="margin-bottom: 25px">
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Зберегти</button>
@@ -45,6 +57,7 @@
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
     <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/adminlte/dist/js/adminlte.js?v=3.2.0"></script>
+    <script src="/script.js"></script>
 </div>
 </body>
 

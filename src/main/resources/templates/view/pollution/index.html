@@ -25,35 +25,105 @@
                 <label for="excelFile" class="btn btn-success">Вставити з Excel</label>
                 <input type="file" name="file" id="excelFile" style="display: none">
             </form>
-            <table id="table" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Об'єкт</th>
-                    <th>Речовина</th>
-                    <th>Кількість речовини</th>
-                    <th>Рік</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="pollution: ${pollutions}">
-                    <td th:text="${pollution.id}"></td>
-                    <td th:text="${pollution.enterprise.name}"></td>
-                    <td th:text="${pollution.pollutant.name}"></td>
-                    <td th:text="${pollution.quantity} + ' (' + ${pollution.unitOfMeasurement} + ')'"></td>
-                    <td th:text="${pollution.year}"></td>
-                    <td style="width: 100px">
-                        <a class="btn btn-default btn-sm" th:href="@{/pollution/edit/{id}(id=${pollution.id})}" title="Редактировать">
-                            <i class="fa fa-pencil-alt"></i>
-                        </a>
-                        <a class="btn btn-default btn-sm" th:href="@{/pollution/delete/{id}(id=${pollution.id})}" title="Удалить" >
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table id="table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Об'єкт</th>
+                        <th>Речовина</th>
+                        <th>Кількість речовини</th>
+                        <th>Рік</th>
+                        <th>Концентрація</th>
+                        <th>Не канцерогений ризик</th>
+                        <th>Канцерогений ризик</th>
+                        <th>Компенсація(грн)</th>
+                        <th>Податок(грн)</th>
+                        <th style="width: 150px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pollution: ${pollutions}">
+                        <td th:text="${pollution.id}"></td>
+                        <td th:text="${pollution.enterprise.name}"></td>
+                        <td th:text="${pollution.pollutant.name}"></td>
+                        <td th:text="${pollution.quantity} + ' (' + ${pollution.unitOfMeasurement} + ')'"></td>
+                        <td th:text="${pollution.year}"></td>
+                        <td th:text="${pollution.concentration}"></td>
+                        <td>
+                            <script>
+                                var cancerRisk = parseFloat([[${pollution.carcinogenicRisk}]]);
+
+                                function getColorClass(zeroCount) {
+                                    if (zeroCount >= 0 && zeroCount <= 5) {
+                                        return 'alert-success';
+                                    } else if (zeroCount > 5 && zeroCount < 7) {
+                                        return 'alert-warning'
+                                    } else {
+                                        return 'alert-danger';
+                                    }
+                                }
+
+                                function getExponent(value) {
+                                    const strValue = value.toString();
+                                    const indexE = strValue.indexOf('e-');
+                                    if (indexE === -1) {
+                                        return 3;
+                                    }
+                                    const exponentPart = strValue.slice(indexE + 2);
+                                    const exponent = parseInt(exponentPart, 10);
+                                    return exponent - 4;
+                                }
+
+                                var zeroCount = getExponent(cancerRisk);
+                                console.log(zeroCount)
+                                var blockElement = document.createElement('div');
+                                blockElement.className = 'alert ' + getColorClass(zeroCount);
+                                blockElement.innerHTML = cancerRisk * 10000;
+                                var parentElement = document.currentScript.parentElement;
+                                parentElement.appendChild(blockElement);
+                            </script>
+                        </td>
+                        <td>
+                            <div class="container">
+                                <script>
+                                    var cancerRisk = parseFloat([[${pollution.nonCarcinogenicRisk}]]);
+
+                                    var blockElement = document.createElement('div');
+                                    blockElement.className = 'alert';
+
+                                    if (cancerRisk > 1) {
+                                        blockElement.innerHTML = cancerRisk.toFixed(4);
+                                        blockElement.className += ' alert-danger';
+                                    } else if (cancerRisk === 1) {
+                                        blockElement.innerHTML = cancerRisk.toFixed(4);
+                                        blockElement.className += ' alert-warning';
+                                    } else {
+                                        blockElement.innerHTML = cancerRisk.toFixed(4);
+                                        blockElement.className += ' alert-success';
+                                    }
+
+                                    var parentElement = document.currentScript.parentElement;
+                                    parentElement.appendChild(blockElement);
+                                </script>
+                            </div>
+                        </td>
+                        <td th:text="${pollution.compensation}"></td>
+                        <td th:text="${pollution.impost}"></td>
+                        <td style="width: 100px">
+                            <a class="btn btn-default btn-sm" th:href="@{/pollution/edit/{id}(id=${pollution.id})}"
+                               title="Редактировать">
+                                <i class="fa fa-pencil-alt"></i>
+                            </a>
+                            <a class="btn btn-default btn-sm" th:href="@{/pollution/delete/{id}(id=${pollution.id})}"
+                               title="Удалить">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </div>
     <script>
